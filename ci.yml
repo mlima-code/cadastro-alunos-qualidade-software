@@ -1,0 +1,36 @@
+name: CI - Validação do Projeto Web
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validar-projeto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Verificar arquivos principais
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f script.js
+          test -f logo.png
+
+      - name: Validar conteúdo básico do HTML
+        run: |
+          grep -q "<!DOCTYPE html>" index.html
+          grep -q '<script src="script.js"></script>' index.html
+          grep -q '<link rel="stylesheet" href="styles.css">' index.html
+
+      - name: Validar conteúdo básico do JavaScript
+        run: |
+          grep -q "localStorage" script.js
+          grep -q "addEventListener" script.js
+          grep -q "function atualizarTabela" script.js
