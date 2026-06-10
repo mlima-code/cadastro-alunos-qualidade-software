@@ -24,9 +24,27 @@ const turma = document.getElementById("turma");
 
 limparErros();
 
-if(!nome.value || !matricula.value || !email.value || !turma.value){
-mostrarErro("Preencha todos os campos.");
-marcarCamposVazios([nome,matricula,email,turma]);
+if(!nome.value){
+mostrarErro("Informe o nome completo.");
+nome.classList.add("erro");
+return;
+}
+
+if(!matricula.value){
+mostrarErro("Informe a matrícula.");
+matricula.classList.add("erro");
+return;
+}
+
+if(!email.value){
+mostrarErro("Informe o e-mail.");
+email.classList.add("erro");
+return;
+}
+
+if(!turma.value){
+mostrarErro("Selecione uma turma.");
+turma.classList.add("erro");
 return;
 }
 
